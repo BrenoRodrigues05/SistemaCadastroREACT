@@ -1,0 +1,35 @@
+import Link from "next/link";
+
+export default function Header() {
+  return (
+    <header>
+        <nav className="max-w-7xl mx-auto flex items-center justify-between p-3">
+        {/* Logo / nome */}
+        <h1 className="font-extrabold text-red-600 text-2xl">
+            BRENO
+            <span className="text-gray-700 dark:text-gray-300"> TECH</span>
+        </h1>
+
+        {/* Navegação */}
+        <ul className="flex items-center gap-6 text-xl font-semibold">
+        <li>
+            <Link
+                href="/"
+                className="text-foreground hover:text-red-600 transition"
+            >
+                Home
+            </Link>
+            </li>
+            <li>
+            <Link
+                href="/login"
+                className="text-foreground hover:text-red-600 transition"
+            >
+                Login
+            </Link>
+            </li>
+        </ul>
+    </nav>
+    </header>
+);
+}

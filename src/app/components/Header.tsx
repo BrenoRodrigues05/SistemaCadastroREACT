@@ -21,12 +21,15 @@ export default function Header() {
             </Link>
             </li>
             <li>
-            <Link
-                href="/"
-                className="text-foreground hover:text-red-600 transition"
-            >
+            <button
+                onClick={() => {
+                localStorage.removeItem("token"); // remove o token
+                window.location.href = "/"; // redireciona para home
+                }}
+                    className="text-foreground hover:text-red-600 transition"
+                >
                 Logout
-            </Link>
+            </button>
             </li>
         </ul>
     </nav>

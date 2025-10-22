@@ -1,7 +1,21 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Header from "../components/Header";
 import Forms from "../components/Forms";
 
 export default function Manage(){
+  const router = useRouter();
+
+      useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        // se não tiver token, volta para home
+        if (!token){
+          router.push("/");
+        }
+      }, [router]);
     return(
         <div className="bg-gradient-to-b from-white via-gray-50 to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-black transition-colors min-h-screen flex flex-col">
               {/* Cabeçalho */}
@@ -29,5 +43,5 @@ export default function Manage(){
                 </div>
               </main>
             </div>
-    )
+    );
 }

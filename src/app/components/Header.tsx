@@ -17,15 +17,15 @@ export default function Header() {
                 href="/"
                 className="text-foreground hover:text-red-600 transition"
             >
-                Home
+                Funcionários
             </Link>
             </li>
             <li>
             <Link
-                href="/login"
+                href="/"
                 className="text-foreground hover:text-red-600 transition"
             >
-                Login
+                Logout
             </Link>
             </li>
         </ul>

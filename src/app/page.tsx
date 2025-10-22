@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,7 +16,7 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const response = await fetch("teste", {
+      const response = await fetch("https://localhost:7026/api/Auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -24,7 +26,7 @@ export default function Home() {
 
       const data = await response.json();
       localStorage.setItem("token", data.token);
-      alert("Login realizado com sucesso!");
+      alert("Login realizado com sucesso!");router.push("/manage");
     } catch (err: unknown) {
       if (err instanceof Error) setError(err.message);
       else setError("Erro inesperado");
@@ -84,7 +86,7 @@ export default function Home() {
         </form>
 
         <p className="mt-6 text-red-700 text-sm">
-          © {new Date().getFullYear()} Sistema de Cadastro — Todos os direitos reservados.
+          © {new Date().getFullYear()} Sistema de Cadastro — Todos os direitos reservados. Feito por Breno Rodrigues.
         </p>
       </div>
     </div>

@@ -18,7 +18,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar"
 import { format } from "date-fns"
 
-// Schema de validação
+//  Schema de validação
 const formSchema = z.object({
   cpf: z.string().min(11, { message: "CPF inválido" }),
   nome: z.string().min(2, { message: "O nome precisa ter pelo menos 2 caracteres." }),
@@ -30,7 +30,7 @@ const formSchema = z.object({
   cargo: z.string().min(2, { message: "Cargo inválido" }),
 })
 
-// Placeholders com exemplos
+// Placeholders
 const placeholders: Record<string, string> = {
   cpf: "000.000.000-00",
   nome: "Breno Rodrigues",
@@ -57,8 +57,31 @@ export default function Forms() {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const token = localStorage.getItem("token")
+
+      const response = await fetch("https://localhost:7026/api/Cadastro", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(values),
+      })
+
+      if (!response.ok) {
+        throw new Error("Erro ao enviar dados para a API")
+      }
+
+      const data = await response.json()
+      console.log("✅ Sucesso:", data)
+      alert("Usuário cadastrado com sucesso!")
+      form.reset()
+    } catch (error) {
+      console.error("❌ Erro:", error)
+      alert("Erro ao cadastrar usuário. Verifique o token ou sua sessão.")
+    }
   }
 
   return (
@@ -66,7 +89,7 @@ export default function Forms() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         {Object.keys(formSchema.shape).map((fieldName) => {
           if (fieldName === "dataNascimento") {
-            // Campo Data de Nascimento com calendário
+            // Campo de data com calendário
             return (
               <FormField
                 key={fieldName}
@@ -102,7 +125,6 @@ export default function Forms() {
             )
           }
 
-          // Campos normais
           return (
             <FormField
               key={fieldName}
@@ -110,7 +132,9 @@ export default function Forms() {
               name={fieldName as keyof typeof formSchema.shape}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="capitalize">{fieldName.replace(/([A-Z])/g, " $1")}</FormLabel>
+                  <FormLabel className="capitalize">
+                    {fieldName.replace(/([A-Z])/g, " $1")}
+                  </FormLabel>
                   <FormControl>
                     <Input placeholder={placeholders[fieldName]} {...field} />
                   </FormControl>

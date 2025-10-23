@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ModeToggle } from "./ModeToggle";
 
 export default function Header() {
   return (
@@ -31,6 +32,7 @@ export default function Header() {
                 Logout
             </button>
             </li>
+            <ModeToggle />
         </ul>
     </nav>
     </header>

@@ -26,7 +26,7 @@ export default function Header() {
                 localStorage.removeItem("token"); // remove o token
                 window.location.href = "/"; // redireciona para home
                 }}
-                    className="text-foreground hover:text-red-600 transition"
+                    className="text-foreground hover:text-red-600 transition cursor-pointer"
                 >
                 Logout
             </button>

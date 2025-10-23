@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [username, setUsername] = useState("");
@@ -74,15 +75,16 @@ export default function Home() {
 
           {error && <p className="text-red-600 text-sm">{error}</p>}
 
-          <button
+          <Button
             type="submit"
+            size="icon-lg"
             disabled={loading}
-            className={`mt-4 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg shadow-md transition-transform transform hover:scale-[1.02] ${
+            className={`mt-4 w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg shadow-md transition-transform transform hover:scale-[1.02] cursor-pointer${
               loading ? "opacity-70 cursor-not-allowed" : ""
             }`}
-          >
-            {loading ? "Entrando..." : "Entrar"}
-          </button>
+          > 
+            {loading ? "Fazendo Login..." : "Login"}
+          </Button>
         </form>
 
         <p className="mt-6 text-red-700 text-sm">

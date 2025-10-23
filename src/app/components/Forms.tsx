@@ -145,7 +145,7 @@ export default function Forms() {
           )
         })}
 
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full cursor-pointer">
           Enviar
         </Button>
       </form>

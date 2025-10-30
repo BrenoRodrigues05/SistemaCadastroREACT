@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
 
 export default function Header() {
-  return (
-    <header>
+        return (
+        <header>
         <nav className="max-w-7xl mx-auto flex items-center justify-between p-3">
         {/* Logo / nome */}
         <h1 className="font-extrabold text-red-600 text-2xl">
@@ -15,7 +15,7 @@ export default function Header() {
         <ul className="flex items-center gap-6 text-xl font-semibold">
         <li>
             <Link
-                href="/"
+                href= "/employee"
                 className="text-foreground hover:text-red-600 transition"
             >
                 Funcionários
